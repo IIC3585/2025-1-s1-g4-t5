@@ -1,0 +1,32 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Recetas del Mundo</title>
+        <link rel="stylesheet" href="../src/styles/global.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	</head>
+	<body>
+        <header class="site-header">
+            <a href="/">Recetas del Mundo</a>
+        </header>
+        <main class="main-container">
+		    <slot /> </main>
+        <footer>
+            Desarrollado con <a href="https://astro.build/" target="_blank">Astro</a>. 
+            Datos de <a href="https://www.themealdb.com/" target="_blank">TheMealDB</a>.
+        </footer>
+	</body>
+</html>

@@ -1,0 +1,85 @@
+---
+// src/pages/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// 1. Hacemos fetch de la lista de recetas, igual que en getStaticPaths
+const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood');
+const data = await response.json();
+const meals = data.meals; // Esta es la lista de todas las recetas de la categoría
+---
+
+<BaseLayout title="Inicio">
+	<div class="hero">
+		<h1>Bienvenido a Recetas del Mundo</h1>
+		<p>Explora deliciosos platillos de pescados y mariscos de todas partes.</p>
+	</div>
+
+	<div class="recipe-grid">
+		{meals.map(meal => (
+			<a href={`/recetas/${meal.idMeal}`} class="recipe-card">
+				<img src={meal.strMealThumb} alt={`Imagen de ${meal.strMeal}`} />
+				<div class="card-content">
+					<h3>{meal.strMeal}</h3>
+				</div>
+			</a>
+		))}
+	</div>
+</BaseLayout>
+
+<style>
+	.hero {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.hero h1 {
+		color: var(--primary-color);
+		font-size: 2.8rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.hero p {
+		font-size: 1.2rem;
+		color: var(--secondary-color);
+	}
+
+	.recipe-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.recipe-card {
+		background-color: var(--card-bg);
+		border-radius: 8px;
+		box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+		overflow: hidden;
+		text-decoration: none;
+		color: var(--text-color);
+		transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	}
+
+	.recipe-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+	}
+
+	.recipe-card img {
+		width: 100%;
+		height: 200px;
+		object-fit: cover; /* Asegura que la imagen cubra el espacio sin deformarse */
+		margin: 0;
+		border-radius: 8px 8px 0 0;
+	}
+
+	.recipe-card .card-content {
+		padding: 1rem;
+	}
+
+	.recipe-card h3 {
+		margin: 0;
+		font-family: 'Lora', serif;
+		font-size: 1.3rem;
+		color: var(--secondary-color);
+	}
+</style>
