@@ -115,8 +115,8 @@ src/
 
 ### 1. Clona el repositorio y entra a la carpeta
 ```bash
-git clone https://github.com/usuario/repositorio.git
-cd repositorio/recipes
+git clone https://github.com/IIC3585/2025-1-s1-g4-t5.git
+cd 2025-1-s1-g4-t5.git/recipes
 ```
 
 ### 2. Instala dependencias
